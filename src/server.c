@@ -6,7 +6,7 @@
 /*   By: ccamargo <ccamargo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 22:22:13 by ccamargo          #+#    #+#             */
-/*   Updated: 2022/09/23 22:52:02 by ccamargo         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:00:29 by ccamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 static void	fill_str(int bit)
 {
-	static int	i = 6;
-	static char test = 0;
+	static int				i = 7;
+	static unsigned char	c = 0;
 
 	if (bit)
-		test = test | (bit << i);
+		c = c | (bit << i);
 	i--;
 	if (i == -1)
 	{
-		if (test == '\0')
+		if (c == '\0')
 			write(1, "\n", 1);
 		else
-			write(1, &test, 1);
-		i = 6;
-		test = 0;
+			write(1, &c, 1);
+		i = 7;
+		c = 0;
 	}
 }
 
@@ -43,7 +43,7 @@ static void	get_bit_1(int sig_num)
 	(void)sig_num;
 }
 
-int main(void)
+int	main(void)
 {
 	ft_printf("PID: %d\n", getpid());
 	signal(SIGUSR1, get_bit_0);

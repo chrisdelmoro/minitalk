@@ -1,6 +1,7 @@
-NAME_CLIENT		= client
-NAME_SERVER		= server
-NAME_BONUS		= minitalk_bonus
+NAME_CLIENT			= client
+NAME_SERVER			= server
+NAME_CLIENT_BONUS	= client_bonus
+NAME_SERVER_BONUS	= server_bonus
 
 LIBFT_DIR		= ./libs/libft/
 LIBFT 			= $(LIBFT_DIR)/libft.a
@@ -20,10 +21,11 @@ SRC_CLIENT_PATH	= $(addprefix $(SRC_DIR), $(SRC_CLIENT))
 SRC_SERVER		= server.c
 SRC_SERVER_PATH	= $(addprefix $(SRC_DIR), $(SRC_SERVER))
 
-SRC_DIR_BONUS	= ./bonus/src/
-SRC_BONUS		=	client_bonus.c \
-					server_bonus.c
-SRC_PATH_BONUS	= $(addprefix $(SRC_DIR_BONUS), $(SRC_BONUS))
+SRC_DIR_BONUS			= ./bonus/src/
+SRC_CLIENT_BONUS		= client_bonus.c
+SRC_CLIENT_PATH_BONUS	= $(addprefix $(SRC_DIR_BONUS), $(SRC_CLIENT_BONUS))
+SRC_SERVER_BONUS		= server_bonus.c
+SRC_SERVER_PATH_BONUS	= $(addprefix $(SRC_DIR_BONUS), $(SRC_SERVER_BONUS))
 
 CC				= gcc
 CFLAGS			= -Wall -Wextra -Werror
@@ -32,8 +34,9 @@ BIN						= ./bin/
 BINARY_OUT_CLIENT		= $(addprefix $(BIN), $(NAME_CLIENT))
 BINARY_OUT_SERVER		= $(addprefix $(BIN), $(NAME_SERVER))
 
-BIN_BONUS			= ./bonus/bin/
-BINARY_OUT_BONUS	= $(addprefix $(BIN_BONUS), $(NAME_BONUS))
+BIN_BONUS				= ./bonus/bin/
+BINARY_OUT_CLIENT_BONUS	= $(addprefix $(BIN_BONUS), $(NAME_CLIENT_BONUS))
+BINARY_OUT_SERVER_BONUS	= $(addprefix $(BIN_BONUS), $(NAME_SERVER_BONUS))
 
 VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -q --tool=memcheck
 
@@ -65,19 +68,28 @@ fclean: clean
 	@ rm -rf $(BIN)
 	@ echo "$(NAME_CLIENT) binaries erased successfully!"
 	@ echo "$(NAME_SERVER) binaries erased successfully!"
-	@ rm -f $(BINARY_OUT_BONUS)
+	@ rm -f $(BINARY_OUT_CLIENT_BONUS) $(BINARY_OUT_SERVER_BONUS)
 	@ rm -rf $(BIN_BONUS)
-	@ echo "$(NAME_BONUS) binaries erased successfully!"
+	@ echo "$(NAME_CLIENT_BONUS) binaries erased successfully!"
+	@ echo "$(NAME_SERVER_BONUS) binaries erased successfully!"
 
-bonus: $(BINARY_OUT_BONUS)
+bonus: $(BINARY_OUT_CLIENT_BONUS) $(BINARY_OUT_SERVER_BONUS)
 
-$(BINARY_OUT_BONUS): $(SRC_PATH_BONUS)
+$(BINARY_OUT_CLIENT_BONUS): $(SRC_CLIENT_PATH_BONUS)
 	@ $(MAKE) -C $(LIBFT_DIR)
-	@ cp $(LIBFT) $(NAME_BONUS)
+	@ cp $(LIBFT) $(NAME_CLIENT_BONUS)
 	@ mkdir -p $(BIN_BONUS)
-	@ $(CC) $(CFLAGS) $(SRC_PATH_BONUS) -I $(HEADER_DIR_BONUS) -I $(HEADER_LIBFT) -L $(LIBFT_DIR) -lft -o $(NAME_BONUS)
-	@ mv $(NAME_BONUS) $(BIN_BONUS)
-	@ echo "$(NAME_BONUS) compiled successfully!"
+	@ $(CC) $(CFLAGS) $(SRC_CLIENT_PATH_BONUS) -I $(HEADER_DIR_BONUS) -I $(HEADER_LIBFT) -L $(LIBFT_DIR) -lft -o $(NAME_CLIENT_BONUS)
+	@ mv $(NAME_CLIENT_BONUS) $(BIN_BONUS)
+	@ echo "$(NAME_CLIENT_BONUS) compiled successfully!"
+
+$(BINARY_OUT_SERVER_BONUS): $(SRC_SERVER_PATH_BONUS)
+	@ $(MAKE) -C $(LIBFT_DIR)
+	@ cp $(LIBFT) $(NAME_SERVER_BONUS)
+	@ mkdir -p $(BIN_BONUS)
+	@ $(CC) $(CFLAGS) $(SRC_SERVER_PATH_BONUS) -I $(HEADER_DIR_BONUS) -I $(HEADER_LIBFT) -L $(LIBFT_DIR) -lft -o $(NAME_SERVER_BONUS)
+	@ mv $(NAME_SERVER_BONUS) $(BIN_BONUS)
+	@ echo "$(NAME_SERVER_BONUS) compiled successfully!"
 
 valgrind:
 	@ $(MAKE) -C $(LIBFT_DIR)

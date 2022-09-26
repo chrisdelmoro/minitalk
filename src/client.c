@@ -6,7 +6,7 @@
 /*   By: ccamargo <ccamargo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 22:17:06 by ccamargo          #+#    #+#             */
-/*   Updated: 2022/09/25 22:40:45 by ccamargo         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:58:23 by ccamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(int argc, char **argv)
 
 	action.sa_handler = got_signal;
 	sigemptyset(&action.sa_mask);
-	action.sa_flags = SA_SIGINFO;
+	action.sa_flags = 0;
 	sigaction(SIGUSR1, &action, NULL);
 	if (argc != 3 || !check_pid(argv[1]))
 	{

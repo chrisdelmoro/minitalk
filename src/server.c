@@ -6,7 +6,7 @@
 /*   By: ccamargo <ccamargo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 22:22:13 by ccamargo          #+#    #+#             */
-/*   Updated: 2022/09/25 22:40:32 by ccamargo         ###   ########.fr       */
+/*   Updated: 2022/09/26 19:19:33 by ccamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,25 @@
 
 static void	fill_str(int bit)
 {
-	static int				i = 7;
-	static unsigned char	c = 0;
+	static int	i = 7;
+	static char	c = 0;
+	static char	*msg = "";
+	char		*tmp;
 
 	if (bit)
 		c = c | (bit << i);
 	i--;
 	if (i == -1)
 	{
+		tmp = msg;
+		msg = ft_strjoin(msg, &c);
+		if (ft_strlen(tmp))
+			ft_freethis(&tmp, NULL);
 		if (c == '\0')
-			write(1, "\n", 1);
-		else
-			write(1, &c, 1);
+		{
+			ft_printf("%s\n", msg);
+			ft_freethis(&msg, "");
+		}
 		i = 7;
 		c = 0;
 	}

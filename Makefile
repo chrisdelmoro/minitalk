@@ -38,15 +38,13 @@ BIN_BONUS				= ./bonus/bin/
 BINARY_OUT_CLIENT_BONUS	= $(addprefix $(BIN_BONUS), $(NAME_CLIENT_BONUS))
 BINARY_OUT_SERVER_BONUS	= $(addprefix $(BIN_BONUS), $(NAME_SERVER_BONUS))
 
-VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -q --tool=memcheck
-
 all: $(BINARY_OUT_CLIENT) $(BINARY_OUT_SERVER)
 
 $(BINARY_OUT_CLIENT): $(SRC_CLIENT_PATH)
 	@ $(MAKE) -C $(LIBFT_DIR)
 	@ cp $(LIBFT) $(NAME_CLIENT)
 	@ mkdir -p $(BIN)
-	@ $(CC) $(CFLAGS) $(SRC_CLIENT_PATH) -I $(HEADER_DIR) -I $(HEADER_LIBFT) -L $(LIBFT_DIR) -lft -o $(NAME_CLIENT)
+	@ $(CC) $(CFLAGS) $(SRC_CLIENT_PATH) -I $(HEADER_DIR) -I $(HEADER_LIBFT) -L $(LIBFT_DIR) -lft -g -o $(NAME_CLIENT)
 	@ mv $(NAME_CLIENT) $(BIN)
 	@ echo "$(NAME_CLIENT) compiled successfully!"
 
@@ -54,7 +52,7 @@ $(BINARY_OUT_SERVER): $(SRC_SERVER_PATH)
 	@ $(MAKE) -C $(LIBFT_DIR)
 	@ cp $(LIBFT) $(NAME_SERVER)
 	@ mkdir -p $(BIN)
-	@ $(CC) $(CFLAGS) $(SRC_SERVER_PATH) -I $(HEADER_DIR) -I $(HEADER_LIBFT) -L $(LIBFT_DIR) -lft -o $(NAME_SERVER)
+	@ $(CC) $(CFLAGS) $(SRC_SERVER_PATH) -I $(HEADER_DIR) -I $(HEADER_LIBFT) -L $(LIBFT_DIR) -lft -g -o $(NAME_SERVER)
 	@ mv $(NAME_SERVER) $(BIN)
 	@ echo "$(NAME_SERVER) compiled successfully!"
 
@@ -90,22 +88,6 @@ $(BINARY_OUT_SERVER_BONUS): $(SRC_SERVER_PATH_BONUS)
 	@ $(CC) $(CFLAGS) $(SRC_SERVER_PATH_BONUS) -I $(HEADER_DIR_BONUS) -I $(HEADER_LIBFT) -L $(LIBFT_DIR) -lft -o $(NAME_SERVER_BONUS)
 	@ mv $(NAME_SERVER_BONUS) $(BIN_BONUS)
 	@ echo "$(NAME_SERVER_BONUS) compiled successfully!"
-
-valgrind:
-	@ $(MAKE) -C $(LIBFT_DIR)
-	@ cp $(LIBFT) $(NAME)
-	@ mkdir -p $(BIN)
-	@ $(CC) $(CFLAGS) $(SRC_PATH) -I $(HEADER_DIR) -I $(HEADER_LIBFT) -L $(LIBFT_DIR) -lft -g -o $(NAME)
-	@ mv $(NAME) $(BIN)
-	@ echo "$(NAME) compiled successfully!"
-
-valgrind_bonus:
-	@ $(MAKE) -C $(LIBFT_DIR)
-	@ cp $(LIBFT) $(NAME_BONUS)
-	@ mkdir -p $(BIN_BONUS)
-	@ $(CC) $(CFLAGS) $(SRC_PATH_BONUS) -I $(HEADER_DIR_BONUS) -I $(HEADER_LIBFT) -L $(LIBFT_DIR) -lft -g -o $(NAME_BONUS)
-	@ mv $(NAME_BONUS) $(BIN_BONUS)
-	@ echo "$(NAME_BONUS) compiled successfully!"
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: ccamargo <ccamargo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 22:22:13 by ccamargo          #+#    #+#             */
-/*   Updated: 2022/09/24 19:00:29 by ccamargo         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:40:32 by ccamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,24 @@ static void	fill_str(int bit)
 	}
 }
 
-static void	get_bit_0(int sig_num)
+static void	got_bit(int sig_num)
 {
-	fill_str(0);
-	(void)sig_num;
-}
-
-static void	get_bit_1(int sig_num)
-{
-	fill_str(1);
-	(void)sig_num;
+	if (sig_num == SIGUSR1)
+		fill_str(0);
+	else if (sig_num == SIGUSR2)
+		fill_str(1);
 }
 
 int	main(void)
 {
+	struct sigaction	action;
+
+	action.sa_handler = got_bit;
+	sigemptyset(&action.sa_mask);
+	action.sa_flags = SA_SIGINFO;
+	sigaction(SIGUSR1, &action, NULL);
+	sigaction(SIGUSR2, &action, NULL);
 	ft_printf("PID: %d\n", getpid());
-	signal(SIGUSR1, get_bit_0);
-	signal(SIGUSR2, get_bit_1);
 	while (1)
 		pause();
 	return (EXIT_SUCCESS);

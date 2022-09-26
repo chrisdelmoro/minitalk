@@ -6,7 +6,7 @@
 /*   By: ccamargo <ccamargo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 22:22:13 by ccamargo          #+#    #+#             */
-/*   Updated: 2022/09/25 21:10:05 by ccamargo         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:41:12 by ccamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	fill_str(int bit, int pid)
 	}
 }
 
-static void got_bit(int sig_num, siginfo_t *info, void *context)
+static void	got_bit(int sig_num, siginfo_t *info, void *context)
 {
 	(void) context;
 	if (sig_num == SIGUSR1)

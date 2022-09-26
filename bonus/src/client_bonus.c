@@ -6,7 +6,7 @@
 /*   By: ccamargo <ccamargo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 22:17:06 by ccamargo          #+#    #+#             */
-/*   Updated: 2022/09/25 21:08:59 by ccamargo         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:41:08 by ccamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static void	send_message(int pid, char *msg)
 			if ((msg[i] >> j) & 1)
 			{
 				kill(pid, SIGUSR2);
-				usleep(1000);
+				usleep(500);
 			}
 			else
 			{
 				kill(pid, SIGUSR1);
-				usleep(1000);
+				usleep(500);
 			}
 			j--;
 		}
@@ -56,7 +56,7 @@ static void	send_message(int pid, char *msg)
 	}
 }
 
-static void got_signal(int sig_num)
+static void	got_signal(int sig_num)
 {
 	if (sig_num == SIGUSR1)
 		ft_printf("ACK: Message delivered!\n");

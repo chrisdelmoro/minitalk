@@ -6,12 +6,12 @@
 /*   By: ccamargo <ccamargo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 22:19:32 by ccamargo          #+#    #+#             */
-/*   Updated: 2022/09/25 20:52:11 by ccamargo         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:41:23 by ccamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef MINITALK_BONUS_H
+# define MINITALK_BONUS_H
 
 # include <libft.h>
 # include <ft_printf.h>

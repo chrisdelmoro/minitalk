@@ -6,7 +6,7 @@
 /*   By: ccamargo <ccamargo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 22:17:06 by ccamargo          #+#    #+#             */
-/*   Updated: 2022/09/26 22:45:58 by ccamargo         ###   ########.fr       */
+/*   Updated: 2022/09/27 19:48:50 by ccamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,8 @@ static void	send_message(int pid, char *msg)
 	}
 }
 
-static void	got_signal(int sig_num)
-{
-	if (sig_num == SIGUSR1)
-		ft_printf("ACK: Message delivered!\n");
-}
-
 int	main(int argc, char **argv)
 {
-	struct sigaction	action;
-
-	action.sa_handler = got_signal;
-	sigemptyset(&action.sa_mask);
-	action.sa_flags = 0;
-	sigaction(SIGUSR1, &action, NULL);
 	if (argc != 3 || !check_pid(argv[1]))
 	{
 		ft_printf("Only two arguments are valid: A valid PID and a message \

@@ -6,7 +6,7 @@
 /*   By: ccamargo <ccamargo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 22:17:06 by ccamargo          #+#    #+#             */
-/*   Updated: 2022/09/26 20:53:47 by ccamargo         ###   ########.fr       */
+/*   Updated: 2022/09/26 22:45:58 by ccamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static void	send_message(int pid, char *msg)
 			if ((msg[i] >> j) & 1)
 			{
 				kill(pid, SIGUSR2);
-				usleep(500);
+				usleep(BIT_DELAY);
 			}
 			else
 			{
 				kill(pid, SIGUSR1);
-				usleep(500);
+				usleep(BIT_DELAY);
 			}
 			j--;
 		}

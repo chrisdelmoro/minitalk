@@ -44,7 +44,7 @@ $(BINARY_OUT_CLIENT): $(SRC_CLIENT_PATH)
 	@ $(MAKE) -C $(LIBFT_DIR)
 	@ cp $(LIBFT) $(NAME_CLIENT)
 	@ mkdir -p $(BIN)
-	@ $(CC) $(CFLAGS) $(SRC_CLIENT_PATH) -I $(HEADER_DIR) -I $(HEADER_LIBFT) -L $(LIBFT_DIR) -lft -g -o $(NAME_CLIENT)
+	@ $(CC) $(CFLAGS) $(SRC_CLIENT_PATH) -I $(HEADER_DIR) -I $(HEADER_LIBFT) -L $(LIBFT_DIR) -lft -o $(NAME_CLIENT)
 	@ mv $(NAME_CLIENT) $(BIN)
 	@ echo "$(NAME_CLIENT) compiled successfully!"
 
@@ -52,7 +52,7 @@ $(BINARY_OUT_SERVER): $(SRC_SERVER_PATH)
 	@ $(MAKE) -C $(LIBFT_DIR)
 	@ cp $(LIBFT) $(NAME_SERVER)
 	@ mkdir -p $(BIN)
-	@ $(CC) $(CFLAGS) $(SRC_SERVER_PATH) -I $(HEADER_DIR) -I $(HEADER_LIBFT) -L $(LIBFT_DIR) -lft -g -o $(NAME_SERVER)
+	@ $(CC) $(CFLAGS) $(SRC_SERVER_PATH) -I $(HEADER_DIR) -I $(HEADER_LIBFT) -L $(LIBFT_DIR) -lft -o $(NAME_SERVER)
 	@ mv $(NAME_SERVER) $(BIN)
 	@ echo "$(NAME_SERVER) compiled successfully!"
 

@@ -6,33 +6,43 @@
 /*   By: ccamargo <ccamargo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 22:22:13 by ccamargo          #+#    #+#             */
-/*   Updated: 2022/09/26 19:19:33 by ccamargo         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:02:04 by ccamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minitalk.h>
 
-static void	fill_str(int bit)
+static void	fill_str(char c)
+{
+	char		*c_dup;
+	static char	*msg = "";
+	char		*tmp;
+
+	tmp = msg;
+	c_dup = ft_calloc(2, sizeof(char));
+	c_dup[0] = c;
+	msg = ft_strjoin(msg, c_dup);
+	ft_freethis(&c_dup, NULL);
+	if (c == '\0')
+	{
+		ft_printf("%s\n", msg);
+		ft_freethis(&msg, "");
+	}
+	if (ft_strlen(tmp))
+		ft_freethis(&tmp, NULL);
+}
+
+static void	encode_byte(int bit)
 {
 	static int	i = 7;
 	static char	c = 0;
-	static char	*msg = "";
-	char		*tmp;
 
 	if (bit)
 		c = c | (bit << i);
 	i--;
 	if (i == -1)
 	{
-		tmp = msg;
-		msg = ft_strjoin(msg, &c);
-		if (ft_strlen(tmp))
-			ft_freethis(&tmp, NULL);
-		if (c == '\0')
-		{
-			ft_printf("%s\n", msg);
-			ft_freethis(&msg, "");
-		}
+		fill_str(c);
 		i = 7;
 		c = 0;
 	}
@@ -41,9 +51,9 @@ static void	fill_str(int bit)
 static void	got_bit(int sig_num)
 {
 	if (sig_num == SIGUSR1)
-		fill_str(0);
+		encode_byte(0);
 	else if (sig_num == SIGUSR2)
-		fill_str(1);
+		encode_byte(1);
 }
 
 int	main(void)

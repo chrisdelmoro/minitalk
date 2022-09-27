@@ -6,7 +6,7 @@
 /*   By: ccamargo <ccamargo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 22:17:06 by ccamargo          #+#    #+#             */
-/*   Updated: 2022/09/25 22:41:08 by ccamargo         ###   ########.fr       */
+/*   Updated: 2022/09/26 20:54:44 by ccamargo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	main(int argc, char **argv)
 	if (argc != 3 || !check_pid(argv[1]))
 	{
 		ft_printf("Only two arguments are valid: A valid PID and a message \
-		to the server!\n");
+to the server!\n");
 		return (EXIT_FAILURE);
 	}
 	else

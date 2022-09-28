@@ -3,7 +3,7 @@
 <!-- PROJECT SHIELDS -->
 <br/>
 <p align="center">
-    <img src="https://github.com/chrisdelmoro/minitalk/blob/main/resources/repo/minitalkn.png.png" alt="Logo" width="150" height="150">
+    <img src="https://github.com/chrisdelmoro/minitalk/blob/main/resources/repo/minitalkn.png" alt="Logo" width="150" height="150">
 
   <p align="center">
     The purpose of this project is to code a small data exchange program using UNIX signals.
